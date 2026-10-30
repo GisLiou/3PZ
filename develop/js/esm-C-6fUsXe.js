@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./web-DdGa9346.js","./dist-BW-B4pLB.js"])))=>i.map(i=>d[i]);
+import{registerPlugin as e}from"./dist-BW-B4pLB.js";import{t}from"./index-o8ktfx21.js";var n=e(`App`,{web:()=>t(()=>import(`./web-DdGa9346.js`).then(e=>new e.AppWeb),__vite__mapDeps([0,1]),import.meta.url)});export{n as App};
