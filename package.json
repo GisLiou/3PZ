@@ -1,0 +1,22 @@
+{
+  "name": "3pz-root",
+  "private": true,
+  "description": "3PZ 根目錄：只轉發指令到 game/（遊戲本體與相依套件都在 game/）",
+  "scripts": {
+    "setup": "npm --prefix game ci",
+    "assets": "npm --prefix game run assets --",
+    "dev": "npm --prefix game run dev --",
+    "build": "npm --prefix game run build --",
+    "preview": "npm --prefix game run preview --",
+    "test": "npm --prefix game run test --",
+    "check:mobile": "npm --prefix game run check:mobile --",
+    "build:app": "npm --prefix game run build:app --",
+    "cap:sync": "npm --prefix game run cap:sync --"
+  },
+  "volta": {
+    "node": "22.23.4"
+  },
+  "engines": {
+    "node": ">=22.12"
+  }
+}

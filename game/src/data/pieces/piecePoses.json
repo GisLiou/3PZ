@@ -1,0 +1,312 @@
+{
+ "wei": {
+  "holdA": {
+   "part": 5,
+   "rot": 0,
+   "white": 4
+  },
+  "holdB": {
+   "part": 7,
+   "rot": 0,
+   "white": 6
+  },
+  "stand": {
+   "part": 15,
+   "rot": -90,
+   "white": 14
+  },
+  "p17": {
+   "part": 17,
+   "rot": 0
+  },
+  "p30": {
+   "part": 30,
+   "rot": 0
+  },
+  "facingFront": {
+   "part": 32,
+   "rot": 0
+  },
+  "walkA": {
+   "part": 51,
+   "rot": 0
+  },
+  "raiseHand": {
+   "part": 70,
+   "rot": -90,
+   "white": 59
+  },
+  "p74": {
+   "part": 74,
+   "rot": -90
+  },
+  "p77": {
+   "part": 77,
+   "rot": 0,
+   "white": 19
+  },
+  "walkB": {
+   "part": 80,
+   "rot": 0
+  },
+  "armsOpen": {
+   "part": 94,
+   "rot": -90
+  },
+  "p103": {
+   "part": 103,
+   "rot": -90
+  }
+ },
+ "wu": {
+  "holdA": {
+   "part": 1,
+   "rot": 0,
+   "white": 0
+  },
+  "holdB": {
+   "part": 3,
+   "rot": 0,
+   "white": 2
+  },
+  "p77": {
+   "part": 26,
+   "rot": 0,
+   "white": 41
+  },
+  "p17": {
+   "part": 29,
+   "rot": -90
+  },
+  "p30": {
+   "part": 34,
+   "rot": -90
+  },
+  "raiseHand": {
+   "part": 38,
+   "rot": -90,
+   "white": 22
+  },
+  "walkB": {
+   "part": 39,
+   "rot": 0
+  },
+  "walkA": {
+   "part": 45,
+   "rot": 0
+  },
+  "stand": {
+   "part": 48,
+   "rot": 0,
+   "white": 57
+  },
+  "p103": {
+   "part": 63,
+   "rot": -90
+  },
+  "p74": {
+   "part": 64,
+   "rot": -90
+  },
+  "armsOpen": {
+   "part": 83,
+   "rot": -90
+  },
+  "facingFront": {
+   "part": 88,
+   "rot": 0
+  }
+ },
+ "shu": {
+  "p17": {
+   "part": 16,
+   "rot": 0
+  },
+  "walkB": {
+   "part": 31,
+   "rot": 0
+  },
+  "p30": {
+   "part": 43,
+   "rot": -90
+  },
+  "walkA": {
+   "part": 46,
+   "rot": 0
+  },
+  "p77": {
+   "part": 52,
+   "rot": -90,
+   "white": 99
+  },
+  "armsOpen": {
+   "part": 60,
+   "rot": -90
+  },
+  "holdA": {
+   "part": 62,
+   "rot": -90,
+   "white": 49
+  },
+  "raiseHand": {
+   "part": 69,
+   "rot": -90,
+   "white": 61
+  },
+  "facingFront": {
+   "part": 75,
+   "rot": -90
+  },
+  "holdB": {
+   "part": 82,
+   "rot": -90,
+   "white": 73
+  },
+  "stand": {
+   "part": 90,
+   "rot": 0,
+   "white": 100
+  },
+  "p103": {
+   "part": 92,
+   "rot": -90
+  },
+  "p74": {
+   "part": 107,
+   "rot": -90
+  }
+ },
+ "qun": {
+  "holdA": {
+   "part": 10,
+   "rot": 0,
+   "white": 8
+  },
+  "facingFront": {
+   "part": 24,
+   "rot": 0
+  },
+  "holdB": {
+   "part": 36,
+   "rot": -90,
+   "white": 20
+  },
+  "raiseHand": {
+   "part": 37,
+   "rot": -90,
+   "white": 12
+  },
+  "walkB": {
+   "part": 40,
+   "rot": 0
+  },
+  "p103": {
+   "part": 53,
+   "rot": 0
+  },
+  "p74": {
+   "part": 54,
+   "rot": 0
+  },
+  "p17": {
+   "part": 65,
+   "rot": 0
+  },
+  "walkA": {
+   "part": 72,
+   "rot": 0
+  },
+  "p30": {
+   "part": 76,
+   "rot": 0
+  },
+  "p77": {
+   "part": 87,
+   "rot": 0,
+   "white": 101
+  },
+  "stand": {
+   "part": 89,
+   "rot": 0,
+   "white": 78
+  }
+ },
+ "han": {
+  "walkA": {
+   "part": 13,
+   "rot": -90
+  },
+  "stand": {
+   "part": 18,
+   "rot": -90,
+   "white": 27
+  },
+  "holdB": {
+   "part": 21,
+   "rot": -90,
+   "white": 97
+  },
+  "raiseHand": {
+   "part": 23,
+   "rot": -90,
+   "white": 104
+  },
+  "p30": {
+   "part": 35,
+   "rot": 0
+  },
+  "p77": {
+   "part": 42,
+   "rot": 0,
+   "white": 58
+  },
+  "p17": {
+   "part": 44,
+   "rot": 0
+  },
+  "p74": {
+   "part": 66,
+   "rot": 0
+  },
+  "walkB": {
+   "part": 71,
+   "rot": 0
+  },
+  "facingFront": {
+   "part": 85,
+   "rot": -90
+  },
+  "armsOpen": {
+   "part": 95,
+   "rot": -90
+  },
+  "holdA": {
+   "part": 96,
+   "rot": -90,
+   "white": 11
+  },
+  "p103": {
+   "part": 102,
+   "rot": 0
+  }
+ },
+ "peach": {
+  "stand": {
+   "part": 98,
+   "rot": 0,
+   "white": 55
+  },
+  "p50": {
+   "part": 50,
+   "rot": 0
+  },
+  "p56": {
+   "part": 56,
+   "rot": 0
+  },
+  "p106": {
+   "part": 106,
+   "rot": 0
+  }
+ }
+}

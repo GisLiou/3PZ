@@ -1,0 +1,20 @@
+/** 對話（文字逐句對照 v5，時間區間見 docs/復刻分析/02_教學戰鬥1.md §1） */
+export const TUTORIAL_DIALOGUE = {
+  welcome: '歡迎來到三國志拼圖大戰！\n\n今後您將與名將一起在亂世中\n求生存，建立新時代！',
+  introduceSelf: '我的名字是玲玲。\n\n雖為棉薄之力，\n也請讓我助您作戰♪',
+  introduceParty: '首先是武將。\n他們是您麾下的武將。',
+  introduceHp: '這是您隊伍的HP。\nHP歸零即為敗北\n請多加留意！',
+  introduceMenu: '這是Menu鍵。\n可由此從戰鬥中撤退，\n或進行其他設定變更等。',
+  enemyAppears: '敵兵現身了！\n他們是近來不斷騷擾這一帶的\n黃巾黨賊兵……！',
+  firstMoveHint: '依著箭頭移動士兵\n讓3名士兵排成一列吧！',
+  wave2Start: '做得好♪\n將3名以上的士兵或縱或橫地\n排列，即能攻擊敵人。\n如此不斷前進吧！',
+  zuoCiAppears: '又有敵人！\n他是能施用神奇妖術的\n仙人・左慈！\n暫且觀察一下情況吧。',
+  enemyAttacked: '唔唔唔～敵人的計數減少\n而被攻擊了…。\n計數歸零後便會遭受攻擊，\n請多注意！',
+  healHint: '回復因受到攻擊而減少的HP吧！\n請依箭頭所示移動桃子♪',
+  healed: 'HP回復了！\n那麼，再次移動士兵\n打倒左慈吧！',
+  wave3Start: '左慈留下一匹馬離去了。\n這稱為『覺醒道具』。\n戰鬥結束後將會說明。',
+  zhouYuAppears: '那…那是！\n孫家的名軍師・周瑜！\n若他先攻擊那就危險了！\n先集中攻擊，一口氣打倒他吧！',
+  targetHint: '標上瞄準符號了。\n如此一來便能對敵人集中攻擊！\n請依箭頭移動士兵，擊敗敵人！',
+  enemyGeneralDefeated: '太好了♪\n打倒敵將了！\n用全體攻擊一口氣收拾\n剩下的敵兵們吧！',
+  fiveMatchHint: '湊齊5名紫色的士兵\n攻擊看看吧！',
+} as const;

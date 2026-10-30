@@ -1,0 +1,48 @@
+# 檢查：型別、單元測試、建置；要併入 main 的 PR 另外檢查來源分支與「不可含參考資料的影片」
+# 在 GitHub Rulesets 把 main 設為「必須通過 build-and-test、main-guard 才能合併」（docs/分支與發布.md）
+name: checks
+on:
+  push: { branches: [develop] }
+  pull_request: { branches: [main, develop] }
+  workflow_dispatch:
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: game
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm ci
+        working-directory: game
+      - name: 型別檢查
+        run: npx tsc -b
+        working-directory: game
+      - name: 單元測試
+        run: npx vitest run
+        working-directory: game
+      - name: 建置
+        run: NO_PUBLIC=1 npx vite build
+        working-directory: game
+
+  main-guard:
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 只接受 develop 或 hotfix/ 分支
+        env: { SOURCE_BRANCH: '${{ github.head_ref }}' }
+        run: |
+          case "$SOURCE_BRANCH" in
+            develop|hotfix/*) echo "來源分支：$SOURCE_BRANCH" ;;
+            *) echo "::error::main 只接受 develop 或 hotfix/* 分支的 PR"; exit 1 ;;
+          esac
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: .github
+      - name: 不可包含參考資料的影片（參考資料不進 git，只追蹤 參考資料/README.md）
+        run: |
+          FILES=$(git -c core.quotepath=false ls-tree -r --name-only HEAD -- 參考資料 | grep -v '^參考資料/README.md$' || true)
+          if [ -n "$FILES" ]; then echo "::error::參考資料不可放進 git："; echo "$FILES"; exit 1; fi

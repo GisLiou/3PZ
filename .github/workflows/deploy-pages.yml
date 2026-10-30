@@ -1,0 +1,96 @@
+# 自動建置並發布到 gh-pages 分支（Settings → Pages：Deploy from a branch → gh-pages / (root)）
+#   main    → 網站根目錄（正式版）
+#   develop → /develop/（開發版）
+# 兩版互不影響：
+#   - main 只寫網站根目錄，從不動 /develop/
+#   - develop 只寫 /develop/；與正式版內容相同的素材直接指向根目錄的檔案（只讀），
+#     不同或新增的素材放在 /develop/ 自己的資料夾（tools/deploy/link-develop-assets.mjs）
+# 詳見 docs/分支與發布.md
+name: deploy-pages
+on:
+  push: { branches: [main, develop] }
+  workflow_dispatch:
+permissions: { contents: write, actions: write }
+concurrency: { group: gh-pages, cancel-in-progress: false }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 只取出建置需要的資料夾
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            game
+            遊戲素材
+            自製素材
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: 取出 gh-pages
+        run: |
+          git fetch --depth=1 origin gh-pages:refs/remotes/origin/gh-pages || true
+          if git rev-parse --verify -q origin/gh-pages; then git worktree add site origin/gh-pages; else mkdir site; fi
+      - run: npm ci
+        working-directory: game
+      - name: 計算素材版本
+        run: echo "ASSETS_HASH=$(git ls-tree -r HEAD 遊戲素材 自製素材 game/tools/assets/build-assets.mjs | sha1sum | cut -c1-40)" >> "$GITHUB_ENV"
+
+      - name: 正式版（main → 網站根目錄）
+        if: github.ref_name == 'main'
+        working-directory: game
+        run: |
+          if [ "$(cat ../site/.assets-hash 2>/dev/null)" != "$ASSETS_HASH" ]; then
+            sudo apt-get update && sudo apt-get install -y ffmpeg
+            npm run assets
+            rm -rf ../site/assets ../site/bgm ../site/voice
+            cp -r public/assets public/bgm public/voice ../site/
+            echo "$ASSETS_HASH" > ../site/.assets-hash
+            echo "MAIN_ASSETS_CHANGED=1" >> "$GITHUB_ENV"
+          fi
+          NO_PUBLIC=1 npx vite build --outDir ../build-out
+          find ../site -maxdepth 1 -mindepth 1 ! -name assets ! -name bgm ! -name voice ! -name develop ! -name .assets-hash ! -name .git -exec rm -rf {} +
+          cp -r ../build-out/. ../site/
+
+      - name: 開發版（develop → /develop/）
+        if: github.ref_name == 'develop'
+        working-directory: game
+        run: |
+          DEV=../site/develop
+          mkdir -p "$DEV"
+          MAIN_HASH=$(cat ../site/.assets-hash 2>/dev/null || true)
+          PREVIOUS_DEV_HASH=$(cat "$DEV/.assets-hash" 2>/dev/null || true)
+          PREVIOUS_LINKED_MAIN=$(cat "$DEV/.linked-main-hash" 2>/dev/null || true)
+          if [ "$ASSETS_HASH" = "$PREVIOUS_DEV_HASH" ] && [ "$MAIN_HASH" = "$PREVIOUS_LINKED_MAIN" ] && [ -f "$DEV/assets/manifest.json" ]; then
+            echo "素材沒有變動，沿用上次的開發版素材"
+          elif [ -n "$MAIN_HASH" ] && [ "$ASSETS_HASH" = "$MAIN_HASH" ]; then
+            echo "素材與正式版相同，全部指向正式版"
+            node tools/deploy/link-develop-assets.mjs --main-site=../site --out="$DEV"
+          else
+            echo "素材與正式版不同：轉檔後只放入不同的檔案"
+            sudo apt-get update && sudo apt-get install -y ffmpeg
+            npm run assets
+            node tools/deploy/link-develop-assets.mjs --main-site=../site --out="$DEV" --built=public
+          fi
+          echo "$ASSETS_HASH" > "$DEV/.assets-hash"
+          echo "$MAIN_HASH" > "$DEV/.linked-main-hash"
+          NO_PUBLIC=1 VITE_DEBUG=1 npx vite build --outDir ../build-out
+          find "$DEV" -maxdepth 1 -mindepth 1 ! -name assets ! -name bgm ! -name voice ! -name .assets-hash ! -name .linked-main-hash -exec rm -rf {} +
+          cp -r ../build-out/. "$DEV/"
+
+      - name: 推送 gh-pages
+        working-directory: site
+        run: |
+          touch .nojekyll
+          [ -e .git ] || git init -q
+          git config user.name github-actions && git config user.email github-actions@users.noreply.github.com
+          git checkout -q -B gh-pages
+          git add -A
+          git commit -q -m "deploy ${GITHUB_REF_NAME} ${GITHUB_SHA::7}" || exit 0
+          git push -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" gh-pages
+
+      # 正式版素材換了之後，開發版指向正式版的檔案可能已不同 → 重新發布一次開發版（只影響 /develop/）
+      - name: 重新發布開發版
+        if: github.ref_name == 'main' && env.MAIN_ASSETS_CHANGED == '1'
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          if git ls-remote --exit-code --heads origin develop >/dev/null; then gh workflow run deploy-pages.yml --ref develop; fi

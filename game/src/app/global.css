@@ -1,0 +1,12 @@
+/* 全域樣式：舞台以設計單位排版，字型使用系統繁中字型 */
+#stage {
+  position: absolute; overflow: hidden; background: #000;
+  font-family: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Heiti TC", sans-serif;
+  color: #fff;
+}
+#stage .layer { position: absolute; left: 0; right: 0; top: calc(var(--design-unit)*var(--fit-top)); height: calc(var(--design-unit)*var(--fit-height)); }
+#stage .layer.full { top: 0; height: 100%; }
+#stage .scene { position: absolute; inset: 0; }
+#stage button { font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+#stage button:disabled { filter: brightness(.6); }
+#stage input::placeholder { color: #7f9a90; }

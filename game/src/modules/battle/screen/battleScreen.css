@@ -1,0 +1,55 @@
+/* 戰鬥畫面。座標皆為設計單位（640 寬），--design-unit 由舞台提供 */
+.battle-screen { position: absolute; inset: 0; overflow: hidden; background: #000; }
+.battle-screen i, .battle-screen b { position: absolute; display: block; pointer-events: none; }
+
+/* 背景：天空＋透視地面 */
+.battle-background { position: absolute; inset: 0; overflow: hidden; }
+.battle-sky { left: 0; width: calc(var(--design-unit)*640); background-size: 100% 100%; }
+.battle-ground-clip { position: absolute; left: 0; width: calc(var(--design-unit)*640); overflow: hidden; }
+.battle-ground { inset: 0; }
+
+/* 底部 999 高的版面；螢幕較高時上方是延伸的敵方區域 */
+.battle-layout { position: absolute; left: 0; bottom: 0; width: calc(var(--design-unit)*640); height: calc(var(--design-unit)*999); }
+.battle-enemy-layer, .battle-party-layer, .battle-effect-layer, .battle-overlay-layer {
+  position: absolute; left: 0; top: 0; width: calc(var(--design-unit)*640); height: calc(var(--design-unit)*999); pointer-events: none;
+}
+/* 效果層：蓋在敵方、我方、盤面三區之上；覆蓋層再蓋在效果層之上 */
+.battle-effect-layer { z-index: 3; overflow: visible; }
+.battle-overlay-layer { z-index: 4; overflow: visible; }
+
+/* 最上方：寶箱、勢力相剋圖、Menu */
+.battle-top-bar { position: absolute; left: 0; top: 0; width: calc(var(--design-unit)*640); height: calc(var(--design-unit)*120); z-index: 5; pointer-events: none; }
+
+/* 盤面與小兵 */
+.battle-board { position: absolute; left: 0; top: calc(var(--design-unit)*540); width: calc(var(--design-unit)*640); height: calc(var(--design-unit)*457.14); touch-action: none; background-size: 100% 100%; }
+.battle-board .piece { position: absolute; left: 0; top: 0; will-change: transform; transition: filter .27s linear; }
+.battle-board .piece > i { position: absolute; left: 0; top: 0; }
+.battle-board .piece.is-held { z-index: 5; }
+.battle-board .piece.is-dimmed { filter: brightness(.62); }
+.battle-board.is-all-dimmed .piece { filter: brightness(.5); transition-duration: .8s; }
+.combo-label { position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none; }
+.combo-label > i { position: absolute; }
+
+/* 我方：頭像、頭上小兵、衝鋒的小兵 */
+.party-member { position: absolute; top: calc(var(--design-unit)*405); width: calc(var(--design-unit)*100); height: calc(var(--design-unit)*100); background-size: 100% 100%; }
+.party-member.is-dimmed { filter: brightness(.4); }
+.battle-effect-layer .party-token, .battle-effect-layer .troop { position: absolute; left: 0; top: 0; }
+.battle-effect-layer .party-token > i, .battle-effect-layer .troop > i { position: absolute; left: 0; top: 0; }
+
+/* 敵人 */
+.enemy { position: absolute; }
+.enemy > i { position: absolute; }
+.enemy .enemy-art { background-size: 100% 100%; }
+
+/* 教學對話可以點 */
+.battle-overlay-layer .tutorial-dialog { pointer-events: auto; }
+
+/* 晃動（受擊） */
+.battle-screen .is-shaking { animation: battle-shake .32s linear; }
+@keyframes battle-shake {
+  0%, 100% { transform: none }
+  20% { transform: translate(calc(var(--design-unit)*-8), calc(var(--design-unit)*4)) }
+  40% { transform: translate(calc(var(--design-unit)*7), calc(var(--design-unit)*-5)) }
+  60% { transform: translate(calc(var(--design-unit)*-5), calc(var(--design-unit)*3)) }
+  80% { transform: translate(calc(var(--design-unit)*4), 0) }
+}

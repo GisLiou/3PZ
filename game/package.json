@@ -1,0 +1,37 @@
+{
+  "name": "3pz",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "assets": "node tools/assets/build-assets.mjs",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check:mobile": "node tools/checks/check-mobile.mjs",
+    "cap:sync": "cap sync",
+    "build:app": "tsc -b && vite build && node -e \"require('fs').rmSync('dist/voice',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.6.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.6.0",
+    "@types/node": "22.20.5",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
+    "@vitejs/plugin-react": "6.1.2",
+    "playwright": "1.63.0",
+    "sharp": "0.35.5",
+    "typescript": "5.6.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  },
+  "volta": {
+    "node": "22.23.4"
+  }
+}
