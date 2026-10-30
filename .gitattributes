@@ -1,0 +1,9 @@
+*.png binary
+*.webp binary
+*.jpg binary
+*.mp3 binary
+*.ogg binary
+*.mp4 binary
+# 在 Linux（GitHub Actions）執行的腳本一律用 LF
+*.sh text eol=lf
+*.yml text eol=lf

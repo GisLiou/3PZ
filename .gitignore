@@ -1,0 +1,8 @@
+# 系統產生的檔案
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 參考資料（原版錄影）不進 git，只保留說明檔
+參考資料/*
+!參考資料/README.md
