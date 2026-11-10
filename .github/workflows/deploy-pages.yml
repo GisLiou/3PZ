@@ -26,10 +26,14 @@ jobs:
             自製素材
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
+      # 另外 clone 一份（不用 git worktree：worktree 會沿用上面的 sparse-checkout，develop/ 等資料夾取不出來，推送時 git add 失敗）
       - name: 取出 gh-pages
         run: |
-          git fetch --depth=1 origin gh-pages:refs/remotes/origin/gh-pages || true
-          if git rev-parse --verify -q origin/gh-pages; then git worktree add site origin/gh-pages; else mkdir site; fi
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git clone -q --depth=1 --branch gh-pages --single-branch "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" site
+          else
+            mkdir site
+          fi
       - run: npm ci
         working-directory: game
       - name: 計算素材版本
