@@ -1,0 +1,25 @@
+{
+  "_說明": "我方部隊：關卡 JSON 的 party 可以寫這裡的 id，也可以直接寫陣列。general \"starter\"＝玩家選的初始武將（勢力、頭像跟著換）；其餘寫 faction、portrait（兵種依頭像檔名判斷，或寫 troop）。",
+  "tutorial": [
+    {
+      "general": "starter",
+      "attack": 42,
+      "recovery": 11,
+      "hp": 40
+    },
+    {
+      "faction": "han",
+      "portrait": "武將圖鑑語音/4.漢/Others3/S&M/ch_40200040_s",
+      "attack": 87,
+      "recovery": 11,
+      "hp": 33
+    },
+    {
+      "faction": "qun",
+      "portrait": "武將圖鑑語音/5.群/Others3/S&M/ch_50100044_s",
+      "attack": 92,
+      "recovery": 11,
+      "hp": 33
+    }
+  ]
+}

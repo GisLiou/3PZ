@@ -1,0 +1,59 @@
+{
+  "name": "測試用無限關卡",
+  "bgm": "bg_00002",
+  "party": "tutorial",
+  "leaderSkill": {
+    "faction": "starter",
+    "multiplier": 1.5
+  },
+  "board": {
+    "refill": "random"
+  },
+  "endless": true,
+  "waves": [
+    {
+      "enemies": ["yellowTurbanSpearman", "caoSwordsman", "hanSwordsman"]
+    },
+    {
+      "enemies": [
+        "caoSwordsman",
+        "sunArcher",
+        "caoCaptain",
+        "hanSwordsman",
+        "yellowTurbanSpearman"
+      ],
+      "victory": {
+        "type": "combo",
+        "count": 4
+      }
+    },
+    {
+      "enemies": ["xiahouDun", "caoCao"]
+    },
+    {
+      "enemies": ["caoSwordsman", "zhouYu", "sunArcher"],
+      "victory": {
+        "type": "defeat",
+        "targets": ["zhouYu"]
+      }
+    },
+    {
+      "enemies": ["caoSwordsman", "xiahouDun", "caoCao", "hanSwordsman"],
+      "victory": {
+        "type": "survive",
+        "turns": 3
+      }
+    },
+    {
+      "enemies": ["luBu"],
+      "bgm": "bg_00003"
+    },
+    {
+      "enemies": ["caoCaptain", "luBu", "xiahouDun"],
+      "victory": {
+        "type": "damage",
+        "amount": 1500
+      }
+    }
+  ]
+}

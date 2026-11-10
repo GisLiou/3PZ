@@ -4,7 +4,7 @@
 # 兩版互不影響：
 #   - main 只寫網站根目錄，從不動 /develop/
 #   - develop 只寫 /develop/；與正式版內容相同的素材直接指向根目錄的檔案（只讀），
-#     不同或新增的素材放在 /develop/ 自己的資料夾（tools/deploy/link-develop-assets.mjs）
+#     不同或新增的素材放在 /develop/ 自己的資料夾（game/_開發工具_不需修改/部署/link-develop-assets.mjs）
 # 詳見 docs/分支與發布.md
 name: deploy-pages
 on:
@@ -33,7 +33,7 @@ jobs:
       - run: npm ci
         working-directory: game
       - name: 計算素材版本
-        run: echo "ASSETS_HASH=$(git ls-tree -r HEAD 遊戲素材 自製素材 game/tools/assets/build-assets.mjs | sha1sum | cut -c1-40)" >> "$GITHUB_ENV"
+        run: echo "ASSETS_HASH=$(git ls-tree -r HEAD 遊戲素材 自製素材 game/_開發工具_不需修改/素材轉檔/build-assets.mjs | sha1sum | cut -c1-40)" >> "$GITHUB_ENV"
 
       - name: 正式版（main → 網站根目錄）
         if: github.ref_name == 'main'
@@ -64,12 +64,12 @@ jobs:
             echo "素材沒有變動，沿用上次的開發版素材"
           elif [ -n "$MAIN_HASH" ] && [ "$ASSETS_HASH" = "$MAIN_HASH" ]; then
             echo "素材與正式版相同，全部指向正式版"
-            node tools/deploy/link-develop-assets.mjs --main-site=../site --out="$DEV"
+            node _開發工具_不需修改/部署/link-develop-assets.mjs --main-site=../site --out="$DEV"
           else
             echo "素材與正式版不同：轉檔後只放入不同的檔案"
             sudo apt-get update && sudo apt-get install -y ffmpeg
             npm run assets
-            node tools/deploy/link-develop-assets.mjs --main-site=../site --out="$DEV" --built=public
+            node _開發工具_不需修改/部署/link-develop-assets.mjs --main-site=../site --out="$DEV" --built=public
           fi
           echo "$ASSETS_HASH" > "$DEV/.assets-hash"
           echo "$MAIN_HASH" > "$DEV/.linked-main-hash"

@@ -4,13 +4,13 @@
 
 ## 資料夾
 
-| 路徑 | 內容 | 規則 |
-|---|---|---|
-| `game/` | 遊戲本體（Vite 8 + React 18 + TypeScript + Capacitor 8） | 開發 |
-| `遊戲素材/` | 原版素材（BG、BGM、UI等、武將圖鑑立繪、武將圖鑑語音） | **內容原封不動**；簡體檔名已轉繁體，對照見 [`docs/素材改名對照.md`](docs/素材改名對照.md) |
-| `自製素材/` | 非原版、因必要而自製的部分，每一項都記在 `自製素材/README.md` | 需記錄 |
-| `參考資料/` | 原版錄影（逐禎復刻的依據），說明見 `參考資料/README.md` | **不進 git**，只放本機 |
-| `docs/` | 架構、命名、分支與發布、開發步驟、復刻分析 | 隨開發更新 |
+| 路徑        | 內容                                                          | 規則                                                                                      |
+| ----------- | ------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `game/`     | 遊戲本體（Vite 8 + React 18 + TypeScript + Capacitor 8）      | 開發                                                                                      |
+| `遊戲素材/` | 原版素材（BG、BGM、UI等、武將圖鑑立繪、武將圖鑑語音）         | **內容原封不動**；簡體檔名已轉繁體，對照見 [`docs/素材改名對照.md`](docs/素材改名對照.md) |
+| `自製素材/` | 非原版、因必要而自製的部分，每一項都記在 `自製素材/README.md` | 需記錄                                                                                    |
+| `參考資料/` | 原版錄影（逐禎復刻的依據），說明見 `參考資料/README.md`       | **不進 git**，只放本機                                                                    |
+| `docs/`     | 架構、命名、分支與發布、開發步驟、復刻分析                    | 隨開發更新                                                                                |
 
 ## 分支
 
@@ -31,7 +31,8 @@ npm ci              # 必須顯示 found 0 vulnerabilities
 npm run assets      # 把 遊戲素材/ 轉成 public/（webp、mp3），第一次約 10 分鐘；需要 ffmpeg，記錄在 build-assets.log
 npm run assets -- --clean   # 同上，並刪除 public/ 裡已沒有來源的舊檔
 npm run dev         # 開發伺服器；網址加 #scene=<場景 id> 可直接跳到該畫面
-npm test            # 單元測試
+                    # 戰鬥測試（無限關卡）：#scene=battle&stage=test（改 src/modules/battle/components/StandardBattleLayout.tsx 存檔即熱更新；關卡資料在 src/data/stages/）
+npm test            # 單元測試（test/ 資料夾）
 npm run build       # 網頁版建置（含語音，供下載）
 npm run build:app   # App 版建置（不含語音）→ npx cap sync
 npm run check:mobile -- http://localhost:4173/   # 手機操作檢查（先 npx vite preview）
@@ -41,7 +42,8 @@ npm run check:mobile -- http://localhost:4173/   # 手機操作檢查（先 npx 
 
 1. [`docs/架構.md`](docs/架構.md)：技術、資料夾、規則
 2. [`docs/模組相依.md`](docs/模組相依.md)：模組之間的關係與主要流程
-3. [`docs/命名規範.md`](docs/命名規範.md)：命名規則與用語對照
-4. [`docs/分支與發布.md`](docs/分支與發布.md)：main／develop、網站、發布流程
-5. [`docs/開發步驟.md`](docs/開發步驟.md)：每個部分的審視狀態與待辦
-6. [`docs/手機操作規範.md`](docs/手機操作規範.md)、[`docs/素材說明.md`](docs/素材說明.md)、[`docs/復刻分析/`](docs/復刻分析/)
+3. [`docs/關卡格式.md`](docs/關卡格式.md)：關卡 JSON（合戰、敵人、技能、勝利條件、站位）
+4. [`docs/命名規範.md`](docs/命名規範.md)：命名規則與用語對照
+5. [`docs/分支與發布.md`](docs/分支與發布.md)：main／develop、網站、發布流程
+6. [`docs/開發步驟.md`](docs/開發步驟.md)：每個部分的審視狀態與待辦
+7. [`docs/手機操作規範.md`](docs/手機操作規範.md)、[`docs/素材說明.md`](docs/素材說明.md)、[`docs/復刻分析/`](docs/復刻分析/)

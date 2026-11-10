@@ -10,7 +10,7 @@ export default defineConfig({
   // 開發版發布在 /develop/ 並共用網站根目錄的素材，建置時設 NO_PUBLIC=1 不複製 public/
   publicDir: process.env.NO_PUBLIC ? false : 'public',
   plugins: [react()],
-  resolve: { alias: { '@core': r('./src/core'), '@modules': r('./src/modules'), '@ui': r('./src/ui'), '@data': r('./src/data') } },
+  resolve: { alias: { '@core': r('./src/core'), '@modules': r('./src/modules'), '@ui': r('./src/ui/index.ts'), '@data': r('./src/data') } },
   build: { target: 'es2020', outDir: 'dist', assetsDir: 'js', assetsInlineLimit: 0 },
   server: { host: true },
 });

@@ -1,0 +1,230 @@
+/* 戰鬥畫面。座標皆為設計單位（640 寬），--design-unit 由舞台提供 */
+.battle-screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+/* 畫布上的元件外框（位置由元件標籤的 x、y 決定，見 BattleCanvas.tsx）。
+   isolation：每個元件自成一層，圖層順序完全由標籤先後決定；外框本身不攔手指 */
+.battle-part {
+  position: absolute;
+  isolation: isolate;
+  pointer-events: none;
+  overflow: visible;
+}
+.battle-screen i,
+.battle-screen b {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+
+/* Menu 按鈕：可以點（打開 Menu 對話框，見 BattleScene.tsx） */
+.battle-screen .battle-part-menu,
+.battle-screen .battle-part-menu i,
+.battle-screen .battle-part-menu b {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* 背景：天空＋透視地面 */
+.battle-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.battle-sky {
+  left: 0;
+  width: calc(var(--design-unit) * 640);
+  background-size: 100% 100%;
+}
+.battle-ground-clip {
+  position: absolute;
+  left: 0;
+  width: calc(var(--design-unit) * 640);
+  overflow: hidden;
+}
+.battle-ground {
+  inset: 0;
+}
+
+/* 盤面與小兵 */
+.battle-board {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+  width: calc(var(--design-unit) * 640);
+  height: calc(var(--design-unit) * 457.14);
+  touch-action: none;
+  background-size: 100% 100%;
+}
+.battle-board .piece {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+.battle-board .piece > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.battle-board .piece.is-held {
+  z-index: 5;
+}
+/* 連擊倍率、攻擊時盤面變暗：一片黑色半透明蓋在小兵上（只改透明度，手機上不會卡；逐隻改 filter 會每禎重畫 35 隻） */
+.battle-board .board-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s linear;
+}
+.battle-board.is-all-dimmed .board-dim {
+  opacity: 0.5;
+}
+.combo-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+.combo-label > i {
+  position: absolute;
+}
+
+/* 我方：頭像、頭上小兵、衝鋒的小兵 */
+/* 位置與大小由 <PartyPortraits> 的 size、gap 決定（寫在元素上） */
+.party-member {
+  position: absolute;
+  background-size: 100% 100%;
+}
+.party-member.is-dimmed {
+  filter: brightness(0.4);
+}
+.battle-screen .party-token,
+.battle-screen .troop {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.battle-screen .party-token > i,
+.battle-screen .troop > i {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* 敵人 */
+.enemy {
+  position: absolute;
+}
+.enemy > i {
+  position: absolute;
+}
+.enemy .enemy-art {
+  background-size: 100% 100%;
+  /* 點敵人鎖定目標 */
+  pointer-events: auto;
+}
+
+/* 瞄準符號：在立繪正中央旋轉＋呼吸（明暗交替，大小不變） */
+.target-marker,
+.target-breathe {
+  position: absolute;
+}
+.target-breathe {
+  animation: target-breathe 1.2s ease-in-out infinite alternate;
+}
+.target-spin {
+  animation: target-spin 3s linear infinite;
+}
+@keyframes target-breathe {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes target-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* 敵人「殘 1」：紅色數字忽暗忽明（只改亮度，不縮放） */
+.countdown-warning {
+  animation: countdown-warning 0.6s ease-in-out infinite alternate;
+}
+@keyframes countdown-warning {
+  from {
+    filter: brightness(1.15);
+  }
+  to {
+    filter: brightness(0.4);
+  }
+}
+
+/* 晃動（受擊） */
+.battle-screen .is-shaking {
+  animation: battle-shake 0.32s linear;
+}
+@keyframes battle-shake {
+  0%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: translate(
+      calc(var(--design-unit) * -8),
+      calc(var(--design-unit) * 4)
+    );
+  }
+  40% {
+    transform: translate(
+      calc(var(--design-unit) * 7),
+      calc(var(--design-unit) * -5)
+    );
+  }
+  60% {
+    transform: translate(
+      calc(var(--design-unit) * -5),
+      calc(var(--design-unit) * 3)
+    );
+  }
+  80% {
+    transform: translate(calc(var(--design-unit) * 4), 0);
+  }
+}
+
+/* 勝利條件提示（<VictoryHint>，大小與位置寫在標籤上） */
+.victory-hint {
+  box-sizing: border-box;
+  border-style: solid;
+  border-color: #d8b25a;
+  background: rgba(20, 12, 6, 0.72);
+  color: #fff;
+  font-family: "PingFang TC", "Noto Sans TC", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  white-space: pre-line;
+  pointer-events: none;
+  animation: victory-hint-in 0.3s ease-out;
+}
+.victory-hint-title {
+  color: #ffd34a;
+  margin-bottom: 0.15em;
+}
+@keyframes victory-hint-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+}

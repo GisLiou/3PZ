@@ -1,0 +1,29 @@
+{
+  "default": "shu",
+  "generals": [
+    {
+      "faction": "wu",
+      "name": "孫權",
+      "assetCode": "go",
+      "boardLetter": "R",
+      "portrait": "武將圖鑑語音/2.吳/孫權/S&M/ch_21200001_s",
+      "description": "繼承孫吳霸業遺志的三國志主角之一。擁有尊貴的面相「碧眼紫髯」（藍眼珠與紅棕色的鬍鬚），背負著父親孫堅的期待。"
+    },
+    {
+      "faction": "shu",
+      "name": "劉備",
+      "assetCode": "syoku",
+      "boardLetter": "G",
+      "portrait": "武將圖鑑語音/3.蜀/劉備/S&M/ch_31200001_s",
+      "description": "中山靖王劉勝的後代，三國志的主角之一。雖然生長於幽州樓桑村的貧困家庭中，仍然胸懷大志，每天都為了助人而四處奔走。"
+    },
+    {
+      "faction": "wei",
+      "name": "曹操",
+      "assetCode": "gi",
+      "boardLetter": "B",
+      "portrait": "武將圖鑑語音/1.魏/曹操/S&M/ch_11200001_s",
+      "description": "成為中原霸者的三國志主角之一。是個天資聰穎卻喜歡惡作劇的少年，讓身邊的長輩每天都很頭疼，因此小名被喚作「阿瞞」（騙子）。"
+    }
+  ]
+}

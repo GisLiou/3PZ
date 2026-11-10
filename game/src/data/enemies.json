@@ -1,0 +1,176 @@
+{
+  "_說明": "敵人資料庫：各關卡共用。key＝敵人 id（關卡 waves 裡寫的就是這個 id）。欄位說明見 docs/關卡格式.md。",
+  "yellowTurbanSpearman": {
+    "name": "黃巾槍兵",
+    "art": "武將圖鑑立繪/5.群/ch_50300048_ll黄巾槍兵",
+    "faction": "qun",
+    "stars": 1,
+    "hp": 300,
+    "attack": {
+      "damage": 10,
+      "interval": 2
+    }
+  },
+  "zuoCi": {
+    "name": "左慈",
+    "showName": true,
+    "art": "武將圖鑑立繪/5.群/ch_50600053_ll【大宛馬】左慈",
+    "faction": "qun",
+    "stars": 5,
+    "hp": 600,
+    "attack": {
+      "damage": 20,
+      "interval": 2
+    },
+    "firstStrike": "attack"
+  },
+  "sunArcher": {
+    "name": "孫軍弓兵",
+    "art": "武將圖鑑立繪/2.吳/ch_20100039_ll孫軍弓兵",
+    "faction": "wu",
+    "stars": 1,
+    "hp": 120,
+    "attack": {
+      "damage": 10,
+      "interval": 2
+    }
+  },
+  "zhouYu": {
+    "name": "周瑜",
+    "art": "武將圖鑑立繪/2.吳/ch_21600037_ll周瑜",
+    "faction": "wu",
+    "stars": 4,
+    "hp": 360,
+    "attack": {
+      "damage": 30,
+      "interval": 2
+    },
+    "skills": [
+      {
+        "name": "火計",
+        "when": {
+          "every": 2
+        },
+        "damage": 45,
+        "fx": "fire",
+        "boardEffect": {
+          "type": "convert",
+          "to": "wu",
+          "count": 4
+        }
+      }
+    ]
+  },
+  "caoSwordsman": {
+    "name": "曹軍劍兵",
+    "art": "武將圖鑑立繪/1.魏/ch_10200037_ll曹軍剣兵",
+    "faction": "wei",
+    "stars": 1,
+    "hp": 200,
+    "attack": {
+      "damage": 12,
+      "interval": 2
+    }
+  },
+  "caoCaptain": {
+    "name": "曹軍兵長",
+    "art": "武將圖鑑立繪/1.魏/ch_11400047_ll曹軍兵長",
+    "faction": "wei",
+    "stars": 2,
+    "hp": 320,
+    "attack": {
+      "damage": 18,
+      "interval": 3
+    }
+  },
+  "hanSwordsman": {
+    "name": "漢軍劍兵",
+    "art": "武將圖鑑立繪/4.漢/ch_40200040_ll漢軍剣兵",
+    "faction": "han",
+    "stars": 1,
+    "hp": 200,
+    "attack": {
+      "damage": 12,
+      "interval": 2
+    }
+  },
+  "xiahouDun": {
+    "name": "夏侯惇",
+    "showName": true,
+    "art": "武將圖鑑立繪/1.魏/ch_14200024_ll【隻眼将軍】夏侯惇",
+    "faction": "wei",
+    "stars": 4,
+    "hp": 900,
+    "attack": {
+      "damage": 35,
+      "interval": 2
+    },
+    "skills": [
+      {
+        "name": "猛攻",
+        "when": {
+          "hpBelow": 0.5
+        },
+        "damage": 80,
+        "fx": "thunder"
+      }
+    ]
+  },
+  "caoCao": {
+    "name": "曹操",
+    "showName": true,
+    "art": "武將圖鑑立繪/1.魏/ch_14200004_ll【東郡太守】曹操",
+    "faction": "wei",
+    "stars": 4,
+    "hp": 1000,
+    "attack": {
+      "damage": 30,
+      "interval": 3
+    },
+    "skills": [
+      {
+        "name": "奸雄",
+        "when": {
+          "every": 2
+        },
+        "damage": 20,
+        "healSelf": 0.15,
+        "boardEffect": {
+          "type": "convert",
+          "from": ["peach"],
+          "to": "wei",
+          "count": 3
+        }
+      }
+    ]
+  },
+  "luBu": {
+    "name": "呂布",
+    "showName": true,
+    "art": "武將圖鑑立繪/5.群/ch_54100189_ll【強弓徹甲】呂布",
+    "faction": "qun",
+    "stars": 5,
+    "hp": 2500,
+    "attack": {
+      "damage": 50,
+      "interval": 2,
+      "voice": "武將圖鑑語音/5.群/呂布/CV小山　剛志/54100189_vcc_01"
+    },
+    "skills": [
+      {
+        "name": "天下無雙",
+        "when": {
+          "every": 3
+        },
+        "damage": 120,
+        "fx": "thunder",
+        "voice": "武將圖鑑語音/5.群/呂布/CV小山　剛志/54100189_vcc_02",
+        "boardEffect": {
+          "type": "convert",
+          "to": "qun",
+          "count": 6
+        }
+      }
+    ]
+  }
+}

@@ -4,12 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "assets": "node tools/assets/build-assets.mjs",
+    "assets": "node _開發工具_不需修改/素材轉檔/build-assets.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "check:mobile": "node tools/checks/check-mobile.mjs",
+    "check:mobile": "node _開發工具_不需修改/手機檢查/check-mobile.mjs",
     "cap:sync": "cap sync",
     "build:app": "tsc -b && vite build && node -e \"require('fs').rmSync('dist/voice',{recursive:true,force:true})\""
   },
